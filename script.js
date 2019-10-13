@@ -2,8 +2,9 @@ var questionOneEl = document.getElementById("question-one")
 var questionTwoEl = document.getElementById("question-two")
 var questionThreeEl = document.getElementById("question-three")
 var questionFourEl = document.getElementById("question-four")
-var startQuizEl = document.getElementById("quiz-start")
+var startQuizEl = document.getElementById("start-quiz")
 var quizEl = document.getElementById("quiz")
+var rightOrWrongEl = document.getElementById("right-or-wrong")
 var questions = [
   {},
   {
@@ -61,7 +62,7 @@ var secondsLeft = 90;
 var questionIndex = 0;
 var lastQuestionIndex = questions.length - 1;
 
-quizEl.addEventListener("click", renderQuestion());
+//quizEl.addEventListener("click", renderQuestion());
 document.querySelector("button").addEventListener("click", checkAnswer());
 
 
@@ -74,12 +75,17 @@ function renderQuestion(){
     questionFourEl.innerHTML = q.questionFourEl;
 }
 
-function checkAnswer(){
-  if(questions[questionIndex].correct !== questions[questionIndex].correct){
+function checkAnswer(answer){
+  if(questions[questionIndex].correct !== answer){
     secondsLeft - 10
+    rightOrWrongEl.innerHTML = "Incorrect!"
   }
-    else{
-    }
+  else if(questions[questionIndex].correct === answer){
+    rightOrWrongEl.innerHTML = "Correct!"
+  }
+  else{
+    rightOrWrongEl.innerHTML = ""
+  }
   if (questionIndex < lastQuestionIndex){
     questionIndex++
     renderQuestion();
